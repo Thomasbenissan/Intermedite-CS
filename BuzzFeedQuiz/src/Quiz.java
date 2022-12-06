@@ -70,9 +70,9 @@ public class Quiz {
     public static String getAnswer(int points) {
         String finalAnswer;
 
-        if (points < 5) { // if the points from answers chosen add up to less than five (exclusive)
+        if (points < 8) { // if the points from answers chosen add up to less than five (exclusive)
             finalAnswer = "Kylian Mbappe";
-        } else if (points > 4 && points < 9) { // if the points from answers chosen add up to a number in betwen 4 and 9
+        } else if (points > 7 && points < 11) { // if the points from answers chosen add up to a number in betwen 4 and 9
                                                // (exclusive)
             finalAnswer = "Lionel Messi";
         } else { // if the points from asnwers chosen add up to a number greater than 8
