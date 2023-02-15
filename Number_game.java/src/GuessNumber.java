@@ -1,73 +1,81 @@
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.*;
-
-//Thomas Benissan 2022
 
 public class GuessNumber {
-  public static void main(String[] args) throws Exception {
-    Random rand = new Random();
-    Scanner scan = new Scanner(System.in);
-    int randomNumber = rand.nextInt(100) + 1; //create random num for user to guess
 
-    File Highscores;
+  static int max;
+  static int randomNumber;
+  static Random rand = new Random();
+  static Scanner sc = new Scanner(System.in);
+  static boolean keepPlaying = true;
+  static File Highscores;
+  
+
+  public static void main(String[] args) throws Exception {
+    
     Highscores = new File("Highscores.txt"); // create new file
     if (Highscores.createNewFile()) { // if the createNewFile function returns true -> the file doesn't exist
       System.out.println("New Highscores file created in this files directory!");
     } else {
       System.out
-          .println("Each new Highscore can be found in the Highscores.txt file in the same directory as this file"); //retiterate where the file can be found
+          .println("Each new Highscore can be found in the Highscores.txt file in the same directory as this file"); // retiterate where the file can be found
     }
 
-    int userGuess; //create a variable for the users guess
-    int guesses = 0; // set the guesses to 0
-    int attempt = 0; // set attempts to 0
+  
+    while (keepPlaying) {
+      System.out.println("Enter the number corresponding to the desired difficulty: ");
+      System.out.println("1. Easy (Max: 10)");
+      System.out.println("2. Medium (Max: 20)");
+      System.out.println("3. Hard (Max: 50)");
+      System.out.println("4. Very Hard (Max: 100)");
+      System.out.println("5. Insane (Max: 200)");
+      int chosenDifficulty = sc.nextInt();
 
-    ArrayList<Integer> nums_guessed = new ArrayList<>();
-
-    System.out.println("Guess a number from 1 to 100");
-    while (attempt < 5) { // Run the loop while the user hasn't used all 5 attempts
-      userGuess = ErrorChecking.errorCheck(scan); // Set the user guess to the input they give while checking to make
-                                                  // sure
-      // the input is a num between 1 and 100 through the errorCheck method
-
-      if (nums_guessed.contains(userGuess)) { //if the guess is in the list of previously guessed nums
-        System.out.println("You've already guess this number, did not count as a guess. Try Again");
-        continue; //restart the loop
-      } else {
-        System.out.println("Yay! This is what I expected");
-        guesses += 1; // increase the number of guesses by 1
-        nums_guessed.add(userGuess); //add the guess to the numbers the user has guessed
+      if (!(chosenDifficulty > 0 && chosenDifficulty < 6)) {
+        System.out.println("This is not a number between 1 and 5 \n");
+        continue;
       }
+      switch (chosenDifficulty) {
+        case 1:
+          max = 10;
+          randomNumber = rand.nextInt(max) + 1;
+          new Game(max, randomNumber, Highscores);
+          break;
 
-      if (userGuess > randomNumber) { // if the users number is greater than the number
-        System.out.println("Your guess is higher than the number. \nGuess again! \n\n");
+        case 2:
+          max = 20;
+          randomNumber = rand.nextInt(max) + 1;
+          new Game(max, randomNumber, Highscores);
+          break;
 
-      } else if (userGuess < randomNumber) { // if the users number is lower than the number
-        System.out.println("Your guess is lower than the number. \nGuess again! \n\n");
+        case 3:
+          max = 50;
+          randomNumber = rand.nextInt(max) + 1;
+          new Game(max, randomNumber, Highscores);
+          break;
 
-      } else { // if its not lower or higher it is the correct number
+        case 4:
+          max = 100;
+          randomNumber = rand.nextInt(max) + 1;
+          new Game(max, randomNumber, Highscores);
+          break;
+        case 5:
+          max = 200;
+          randomNumber = rand.nextInt(max) + 1;
+          new Game(max, randomNumber, Highscores);
+          break;
 
-        System.out.println("Congratulations, you guessed the right number! \n You guessed the correct number in "
-            + guesses + " guesses!"); // tell the user how many guesses they needed, and that they wont the game
-        attempt += 1; // add 1 attempt
-        checkHighscore.isHighscore(Highscores, guesses); // check if its a highscore
-        guesses = 0; // reset guesses to 0
-        randomNumber = rand.nextInt(100) + 1; // rechoose a ranodm int
-        nums_guessed.removeAll(nums_guessed); // remove all the previously guessed numbers
-        if(attempt!= 5){ // if its not the end of the last round
-          System.out.println(
-            "Round " + (attempt + 1) + "\n You have " + (5 - attempt) + " attemps left to beat your highscore"); // print
-        // which
-        // attempt
-        // the
-        // user
-        // is
-        // on
-        }
-        
-
+      }
+      sc.nextLine(); // dispose last enter 
+      System.out.println("Woud you like to play again press [y] or [n]");
+      if (sc.nextLine() == "y") {
+        continue;
+      } else {
+        keepPlaying = false;
+        System.out.println("Thanks for playing");
       }
     }
   }
