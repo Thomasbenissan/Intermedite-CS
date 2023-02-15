@@ -32,7 +32,15 @@ public class GuessNumber {
       System.out.println("3. Hard (Max: 50)");
       System.out.println("4. Very Hard (Max: 100)");
       System.out.println("5. Insane (Max: 200)");
-      int chosenDifficulty = sc.nextInt();
+      String choseDifficulty = sc.nextLine();
+      int chosenDifficulty;
+      try {
+        chosenDifficulty = Integer.parseInt(choseDifficulty);
+      } catch (Exception e) {
+        System.out.println("This is not a number between 1 and 5 \nTry again");
+        continue;
+      }
+
 
       if (!(chosenDifficulty > 0 && chosenDifficulty < 6)) {
         System.out.println("This is not a number between 1 and 5 \n");
