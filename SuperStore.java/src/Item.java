@@ -26,7 +26,7 @@ public class Item{
 
         if(random == 0){ //stock increases price
 
-            priceChange = (int) (price*(1 + volatility) - price ); //final price minus start price
+            priceChange = (int) (price*(1 + volatility) - price ); //final price minus start price   
             price *= (1 + volatility);
 
             

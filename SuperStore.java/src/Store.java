@@ -16,7 +16,7 @@ public class Store {
     
     public static void main(String[] args) throws Exception {
 
-        //create a list of items the user is able to purchase, 
+        //create a list of items the user is able to purchase,  
             //done
         //Run a loop of the game after the introduction
             //done
@@ -37,6 +37,7 @@ public class Store {
         stocks[8] = new Item("Ethereum", 6000, 0.32, 0);
         stocks[9] = new Item("DogeCoin", 1000, 0.55, 0);
         
+        
 
         //introduction
         System.out.println("Welcome to the stock game! \nYou start with $1,000,000 \nRules\n  1. You get to buy or sell 1 stock per day\n  2. Each stock changes price based on its volatility everday\n  3. A stocks volatility is based on its category \n     Car brands are the least volatile (7 - 9%)\n     Tech companies are somewhat volatile (18 - 25%)\n     Crypto is the most volatile (32 - 55%)");
@@ -46,25 +47,31 @@ public class Store {
         while(keepPlaying){
 
             for (Item stock: stocks) { //print out all stocks
-                System.out.println(stock.name + " - $" + stock.price);
+                
+
+                if(!day1){ //if its not day 1 print out the stock price change1
+                
+                    System.out.println(stock.name + " - $" + stock.price + " [" + stock.priceChange + "]");
+                } else{
+                    System.out.println(stock.name + " - $" + stock.price);
+                }
             }
 
             System.out.println("Would you like to buy or sell your stock? \nPress [1] to buy [2] to sell");
 
-            int buyOrSell = ErrorChecking.buyOrSell(sc.nextLine(), userItems); //returns 0 if wrong input, 1 if user buys, 2 if user sells
+            int buyOrSell = ErrorChecking.buyOrSell(sc.nextLine(), userItems); //returns 0 if wrong input, 1 if user buys, 2 if user sells  
 
             if(buyOrSell == 0){
                 continue;
 
             } else if(buyOrSell == 1){ //if the user wants to buy
-                int boughtStock = ErrorChecking.buyStock(stocks, userBalance);
-                userBalance -= boughtStock;
+                userBalance -= ErrorChecking.buyStock(stocks, userBalance);
                      
-            } else if(buyOrSell == 2 && !day1){ //if user wants to sell
-                int soldStock =  ErrorChecking.sellStock(stocks, userBalance);
-                userBalance += soldStock;
+            } else if(buyOrSell == 2 && !day1){ //if user wants to sell 
+                userBalance += ErrorChecking.sellStock(stocks, userBalance);
+
             } else{ //this will only occur when day1 is true
-                System.out.println("You cannot sell any stocks! You haven't bought anything");
+                System.out.println("You cannot sell any stocks! You haven't bought any stock yet!");
                 continue;
             }
 
