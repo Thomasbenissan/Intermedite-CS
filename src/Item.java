@@ -1,6 +1,6 @@
 import java.util.Random;
 
-
+ 
 public class Item{
     //fields
     int price;

@@ -1,6 +1,6 @@
 public class carItem extends Item {
     carItem(String name, int price, int amountOwned) {
-        super(name, price, "Car", amountOwned);
+        super(name, price, "Car", amountOwned); 
     }
 
     @Override

@@ -7,7 +7,7 @@ public class Game {
     static Scanner sc = new Scanner(System.in);
     static int userBalance = 1000000;
     static boolean keepPlaying = true;
-    static boolean day1 = true;
+    static boolean day1 = true; 
 
     static Item[] stocks = new Item[10];
 

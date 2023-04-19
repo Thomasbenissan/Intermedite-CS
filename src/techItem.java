@@ -1,5 +1,5 @@
 public class techItem extends Item {
-    techItem(String name, int price, int amountOwned) {
+    techItem(String name, int price, int amountOwned) { 
         super(name, price, "Tech", amountOwned);
     }
 

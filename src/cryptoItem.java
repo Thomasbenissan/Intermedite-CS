@@ -1,7 +1,7 @@
 public class cryptoItem extends Item {
     cryptoItem(String name, int price, int amountOwned) {
         super(name, price, "Crypto", amountOwned);
-    }
+    } 
 
     @Override
     public void setVolatilityByCategory(){
